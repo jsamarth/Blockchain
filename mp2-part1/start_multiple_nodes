@@ -1,0 +1,19 @@
+#!/bin/bash
+
+rm bandwidths/*.txt;
+rm peers/*.txt;
+rm transactions/*.txt;
+
+read -p "machine number: " machine_num;
+# read -p "number of nodes: " numnodes;
+# read -p "starting port number: " starting_port_number;
+
+ip=$(ifconfig | grep 'inet' -m 1 | awk '{print $2}')
+numnodes=10
+starting_port_number=8000
+echo "Spawning $numnodes processes"
+for (( i=0; i<$numnodes; i++ ))
+do
+	nodename="node_${i}_${machine_num}";
+    python3 node.py $nodename $ip $(($i+$starting_port_number)) &
+done

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+read -p "machine number: " machine_num;
+read -p "number of nodes: " numnodes;
+read -p "IP: " ip;
+read -p "starting port number: " starting_port_number;
+
+echo "Spawning $numnodes processes"
+for (( i=1; i<=$numnodes; i++ ))
+do
+	nodename="node_${i}_${machine_num}";
+    python node.py $nodename $ip $(($i+$starting_port_number)) &
+done
