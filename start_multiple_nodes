@@ -9,5 +9,5 @@ echo "Spawning $numnodes processes"
 for (( i=1; i<=$numnodes; i++ ))
 do
 	nodename="node_${i}_${machine_num}";
-    python node.py $nodename $ip $(($i+$starting_port_number)) &
+    python3 node.py $nodename $ip $(($i+$starting_port_number)) &
 done
